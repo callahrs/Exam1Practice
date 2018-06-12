@@ -2,10 +2,11 @@
 PRACTICE Test 1, problem 3.
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
+         their colleagues and Riley Callahan.
 """  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
+
 
 ########################################################################
 # Students:
@@ -102,6 +103,19 @@ def run_test_problem3a():
     # Below this comment (or integrated with one of the above tests,
     # your choice), add 1 more test case of your own choosing.
     # ------------------------------------------------------------------
+    # Window 4:
+    title = 'Problem 3a. Test 5: Start at (40, 40), 10 lines'
+    window4 = rg.RoseWindow(450, 300, title)
+
+    # Test 5 (it is on window 4):
+    point = rg.Point(40, 40)
+    expected = 88
+    answer = problem3a(window4, point, 10)
+    print()
+    print('Test 5 expected:', expected)
+    print('       actual:  ', answer)
+
+    window4.close_on_mouse_click()
 
 
 def problem3a(window, point, n):
@@ -145,6 +159,21 @@ def problem3a(window, point, n):
     #    DIFFICULTY:      7 or 8
     #    TIME ESTIMATE:   20 to 35 minutes.
     # ------------------------------------------------------------------
+    total = 0
+    for k in range(n):
+        startpointx = point.x + 20 * k
+        startpointy = point.y + 10 * k
+        line = rg.Line(rg.Point(startpointx, startpointy), rg.Point(
+            startpointx, startpointy + 50))
+        line.thickness = k * 2 + 1
+        if line.thickness > 13:
+            line.thickness = 13
+            total = total + 13
+        else:
+            total = total + k * 2 + 1
+        line.attach_to(window)
+        window.render()
+    return total
 
 
 def run_test_problem3b():
@@ -214,6 +243,16 @@ def problem3b(m, point1):
     #    DIFFICULTY:      8 or 9
     #    TIME ESTIMATE:   20 to 30 minutes.
     # ------------------------------------------------------------------
+    totalf = 0
+    window = rg.RoseWindow(400, 650)
+    for k in range(m):
+        total = problem3a(window, point1, (k * 2 + 3))
+        point1.y = point1.y + 60
+        totalf = totalf + total
+    window.render()
+    window.close_on_mouse_click()
+    return totalf
+
 
 # ----------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
