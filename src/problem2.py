@@ -2,10 +2,11 @@
 PRACTICE Test 1, problem 2.
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
+         their colleagues and Riley Callahan.
 """  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
+
 
 ########################################################################
 # Students:
@@ -110,6 +111,22 @@ def problem2a(circle, rectangle, window):
     #    DIFFICULTY:      6
     #    TIME ESTIMATE:   10 to 15 minutes.
     # ------------------------------------------------------------------
+    circle.attach_to(window)
+    rectangle.attach_to(window)
+    window.render()
+
+    window.continue_on_mouse_click()
+    upperrightpoint = rectangle.get_upper_right_corner()
+    lowwerleftpoint = rectangle.get_lower_left_corner()
+    line = rg.Line(upperrightpoint, lowwerleftpoint)
+    line.arrow = 'last'
+    line.attach_to(window)
+    window.render()
+
+    window.continue_on_mouse_click()
+    circle.fill_color = rectangle.outline_color
+    window.render()
+
 
 def run_test_problem2b():
     """ Tests the  problem2b   function. """
@@ -181,6 +198,15 @@ def problem2b(rect, n, delta, win):
     #    DIFFICULTY:      7
     #    TIME ESTIMATE:   15 to 25 minutes.
     # ------------------------------------------------------------------
+    rect.attach_to(win)
+    for k in range(n):
+        point1 = rg.Point(rect.get_upper_left_corner().x - k * delta,
+                          rect.get_upper_left_corner().y - k * delta)
+        point2 = rg.Point(rect.get_lower_right_corner().x + k * delta,
+                          rect.get_lower_right_corner().y + k * delta)
+        rectangle = rg.Rectangle(point1, point2)
+        rectangle.attach_to(win)
+    win.render()
 
 
 # ----------------------------------------------------------------------
