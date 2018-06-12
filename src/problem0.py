@@ -313,7 +313,7 @@ def problem0c(circle, n, window):
         circle1 = rg.Circle(center, radius)
         circle1.attach_to(window)
         x = x + 2 * radius
-        window.render(.5)
+        window.render(0.5)
 
 
 # ----------------------------------------------------------------------
